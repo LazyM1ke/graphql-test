@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
 import { GET_OBJ_TEMPLATE } from './graphql/objTemplate'
-import { objTemplate } from './graphql/types/types'
 import { ADD_OBJ_TEMPLATE } from './graphql/addObjTemplate'
-import './App.scss'
 import styled from 'styled-components'
-import ObjTemplate from './components/ObjTemplate/ObjTemplate'
 import { useAppDispatch } from './store/hooks/hooks'
 import { setObjTemplates } from './store/Reducers/ObjTemplateReducer/ObjTemplateSlice'
+import Header from './components/Header/Header'
+import Tree from './components/Tree/Tree'
+import { CollapseGroup } from '@consta/uikit/CollapseGroup'
+import TreeItem from './components/TreeItem/TreeItem'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -48,38 +49,45 @@ function App() {
   if (error) return <div>{`Error! ${error.message}`}</div>
 
   return (
-    <MainPanel className="App">
-      <InputWrapper>
-        <Input
-          value={tempName}
-          onChange={(e) => setTempName(e.target.value)}
-          placeholder="Type template name..."
-          type="text"
-        />
+    <div>
+      <Header />
+      <Tree>
+        <TreeItem />
+      </Tree>
+    </div>
 
-        <Button onClick={(e) => addTemplate(e)}>ADD TEMPLATE</Button>
-      </InputWrapper>
-      <ObjTemplateList>
-        {data.objTemplate.map((item: objTemplate, idx: number) => (
-          <div>
-            <ObjTemplate
-              idx={idx}
-              key={item.id}
-              {...item}
-            />
-            {item.paramTemplates && item.paramTemplates.length ? (
-              <ObjTemplate
-                idx={idx}
-                {...item}
-              />
-            ) : null}
-          </div>
-        ))}
-      </ObjTemplateList>
-      {/*{item.paramTemplates?.map((param: paramTemplate) => (*/}
-      {/*  <div key={param.id}>{param.name}</div>*/}
-      {/*))}*/}
-    </MainPanel>
+    // <MainPanel className="App">
+    //   <InputWrapper>
+    //     <Input
+    //       value={tempName}
+    //       onChange={(e) => setTempName(e.target.value)}
+    //       placeholder="Type template name..."
+    //       type="text"
+    //     />
+    //
+    //     <Button onClick={(e) => addTemplate(e)}>ADD TEMPLATE</Button>
+    //   </InputWrapper>
+    //   <ObjTemplateList>
+    //     {data.objTemplate.map((item: objTemplate, idx: number) => (
+    //       <div>
+    //         <ObjTemplate
+    //           idx={idx}
+    //           key={item.id}
+    //           {...item}
+    //         />
+    //         {item.paramTemplates && item.paramTemplates.length ? (
+    //           <ObjTemplate
+    //             idx={idx}
+    //             {...item}
+    //           />
+    //         ) : null}
+    //       </div>
+    //     ))}
+    //   </ObjTemplateList>
+    //   {/*{item.paramTemplates?.map((param: paramTemplate) => (*/}
+    //   {/*  <div key={param.id}>{param.name}</div>*/}
+    //   {/*))}*/}
+    // </MainPanel>
   )
 }
 

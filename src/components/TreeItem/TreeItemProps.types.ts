@@ -1,0 +1,3 @@
+interface TreeItemPropsTypes {
+  items: []
+}
