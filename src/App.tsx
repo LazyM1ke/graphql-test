@@ -7,8 +7,10 @@ import { useAppDispatch } from './store/hooks/hooks'
 import { setObjTemplates } from './store/Reducers/ObjTemplateReducer/ObjTemplateSlice'
 import Header from './components/Header/Header'
 import Tree from './components/Tree/Tree'
-import { CollapseGroup } from '@consta/uikit/CollapseGroup'
 import TreeItem from './components/TreeItem/TreeItem'
+import { IconHealth } from '@consta/uikit/IconHealth'
+import { IconEdit } from '@consta/uikit/IconEdit'
+import { TextField } from '@consta/uikit/TextField'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -51,74 +53,59 @@ function App() {
   return (
     <div>
       <Header />
-      <Tree>
-        <TreeItem />
-      </Tree>
+      <MainPanel>
+        <Tree
+          title="Шаблоны"
+          firstHeaderIcon={
+            <IconHealth
+              size="s"
+              view="secondary"
+            />
+          }
+          secondHeaderIcon={
+            <IconEdit
+              size="s"
+              view="secondary"
+            />
+          }
+        >
+          <TreeItem />
+        </Tree>
+        <Tree
+          title="Сведения"
+          firstHeaderIcon={
+            <IconHealth
+              size="s"
+              view="secondary"
+            />
+          }
+          secondHeaderIcon={
+            <IconEdit
+              size="s"
+              view="secondary"
+            />
+          }
+        >
+          <TextField
+            placeholder="Наименование шаблона"
+            label="Шаблон наименование короткое"
+            labelPosition="top"
+          />
+          <TextField
+            placeholder="Описание шаблона"
+            label="Описание"
+            labelPosition="top"
+          />
+        </Tree>
+      </MainPanel>
     </div>
-
-    // <MainPanel className="App">
-    //   <InputWrapper>
-    //     <Input
-    //       value={tempName}
-    //       onChange={(e) => setTempName(e.target.value)}
-    //       placeholder="Type template name..."
-    //       type="text"
-    //     />
-    //
-    //     <Button onClick={(e) => addTemplate(e)}>ADD TEMPLATE</Button>
-    //   </InputWrapper>
-    //   <ObjTemplateList>
-    //     {data.objTemplate.map((item: objTemplate, idx: number) => (
-    //       <div>
-    //         <ObjTemplate
-    //           idx={idx}
-    //           key={item.id}
-    //           {...item}
-    //         />
-    //         {item.paramTemplates && item.paramTemplates.length ? (
-    //           <ObjTemplate
-    //             idx={idx}
-    //             {...item}
-    //           />
-    //         ) : null}
-    //       </div>
-    //     ))}
-    //   </ObjTemplateList>
-    //   {/*{item.paramTemplates?.map((param: paramTemplate) => (*/}
-    //   {/*  <div key={param.id}>{param.name}</div>*/}
-    //   {/*))}*/}
-    // </MainPanel>
   )
 }
 
 const MainPanel = styled.div`
-  width: 400px;
-  padding: 15px 20px;
-  background-color: antiquewhite;
-`
-const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
-  gap: 12px;
-`
-const ObjTemplateList = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`
-
-const Input = styled.input`
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-`
-
-const Button = styled.button`
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: aquamarine;
+  align-content: center;
+  flex-direction: row;
 `
 
 export default App
