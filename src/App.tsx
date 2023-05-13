@@ -11,10 +11,32 @@ import TreeItem from './components/TreeItem/TreeItem'
 import { IconHealth } from '@consta/uikit/IconHealth'
 import { IconEdit } from '@consta/uikit/IconEdit'
 import { TextField } from '@consta/uikit/TextField'
+import { Text } from '@consta/uikit/Text'
+import { Select } from '@consta/uikit/Select'
+type Item = {
+  label: string
+  id: number
+}
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+]
 
 function App() {
   const dispatch = useAppDispatch()
   const [tempName, setTempName] = useState('')
+  const [values, setValues] = useState<Item | null>()
 
   const { data, loading, error } = useQuery(GET_OBJ_TEMPLATE)
   const [addObjTemplate, { loading: addTemplateLoading }] = useMutation(ADD_OBJ_TEMPLATE, {
@@ -87,14 +109,159 @@ function App() {
           }
         >
           <TextField
-            placeholder="Наименование шаблона"
+            value="Наименование шаблона"
             label="Шаблон наименование короткое"
             labelPosition="top"
+            size="s"
           />
           <TextField
-            placeholder="Описание шаблона"
+            value="Описание шаблона"
             label="Описание"
             labelPosition="top"
+            size="s"
+          />
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="secondary"
+          >
+            ID
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="m"
+            view="primary"
+          >
+            4
+          </Text>
+        </Tree>
+        <Tree
+          title="Атрибуты"
+          firstHeaderIcon={
+            <IconHealth
+              size="s"
+              view="secondary"
+            />
+          }
+          secondHeaderIcon={
+            <IconEdit
+              size="s"
+              view="secondary"
+            />
+          }
+        >
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="secondary"
+          >
+            Атрибут 1
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="primary"
+          >
+            Атрибут
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="secondary"
+          >
+            Атрибут 2
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="primary"
+          >
+            Атрибут
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="secondary"
+          >
+            Атрибут 3
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="primary"
+          >
+            Атрибут
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="secondary"
+          >
+            Атрибут 4
+          </Text>
+          <Text
+            as="div"
+            align="left"
+            lineHeight="l"
+            size="s"
+            view="primary"
+          >
+            Атрибут
+          </Text>
+        </Tree>
+
+        <Tree title="Параметры атрибута">
+          <TextField
+            value="String"
+            label="Код"
+            labelPosition="top"
+            size="s"
+          />
+          <TextField
+            value="27.04.2023"
+            label="Дата создания"
+            labelPosition="top"
+            size="s"
+          />
+          <Select
+            placeholder="Группа атрибутов"
+            label="Группа"
+            size="s"
+            items={items}
+            value={values}
+            onChange={({ value }) => setValues(value)}
+          />
+          <TextField
+            value="Новый атрибут"
+            label="Название атрибута"
+            labelPosition="top"
+            size="s"
+          />
+          <TextField
+            label="Описание атрибута"
+            type="textarea"
+            rows={4}
+            cols={30}
+            size="s"
+            value="Новый атрибут"
           />
         </Tree>
       </MainPanel>

@@ -24,10 +24,10 @@ const TreeHeader = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 30px;
-  position: absolute;
   padding: 11px 15px;
+  height: 32px;
   background: #4d525b;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 12px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.32);
   svg {
     cursor: pointer;
   }
@@ -36,9 +36,10 @@ const TreeHeader = styled.div`
 const TreeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 324px;
+  width: 100%;
   background: #23272a;
-  max-height: 500px;
+  //max-height: 500px;
+  min-height: 100%;
   overflow: scroll;
   position: relative;
 `
