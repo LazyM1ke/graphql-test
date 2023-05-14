@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { GET_OBJ_TEMPLATE } from './graphql/objTemplate'
+import { GET_OBJ_TEMPLATE, ITemplate } from './graphql/objTemplate'
 import { ADD_OBJ_TEMPLATE } from './graphql/addObjTemplate'
 import styled from 'styled-components'
 import { useAppDispatch } from './store/hooks/hooks'
 import { setObjTemplates } from './store/Reducers/ObjTemplateReducer/ObjTemplateSlice'
 import Header from './components/Header/Header'
 import Tree from './components/Tree/Tree'
-import TreeItem from './components/TreeItem/TreeItem'
 import { IconHealth } from '@consta/uikit/IconHealth'
 import { IconEdit } from '@consta/uikit/IconEdit'
 import { TextField } from '@consta/uikit/TextField'
 import { Text } from '@consta/uikit/Text'
 import { Select } from '@consta/uikit/Select'
+import Template from './components/Template/Template'
+
 type Item = {
   label: string
   id: number
@@ -44,7 +45,6 @@ function App() {
   })
 
   useEffect(() => {}, [data])
-
   const addTemplate = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     addObjTemplate({
@@ -91,7 +91,12 @@ function App() {
             />
           }
         >
-          <TreeItem />
+          {data.objTemplate.map((template: ITemplate) => (
+            <Template
+              template={template}
+              key={template.id}
+            />
+          ))}
         </Tree>
         <Tree
           title="Сведения"
@@ -120,24 +125,26 @@ function App() {
             labelPosition="top"
             size="s"
           />
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="secondary"
-          >
-            ID
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="m"
-            view="primary"
-          >
-            4
-          </Text>
+          <div>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="secondary"
+            >
+              ID
+            </Text>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="m"
+              view="primary"
+            >
+              4
+            </Text>
+          </div>
         </Tree>
         <Tree
           title="Атрибуты"
@@ -154,78 +161,86 @@ function App() {
             />
           }
         >
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="secondary"
-          >
-            Атрибут 1
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="primary"
-          >
-            Атрибут
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="secondary"
-          >
-            Атрибут 2
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="primary"
-          >
-            Атрибут
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="secondary"
-          >
-            Атрибут 3
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="primary"
-          >
-            Атрибут
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="secondary"
-          >
-            Атрибут 4
-          </Text>
-          <Text
-            as="div"
-            align="left"
-            lineHeight="l"
-            size="s"
-            view="primary"
-          >
-            Атрибут
-          </Text>
+          <div>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="secondary"
+            >
+              Атрибут 1
+            </Text>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="primary"
+            >
+              Атрибут
+            </Text>
+          </div>
+          <div>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="secondary"
+            >
+              Атрибут 2
+            </Text>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="primary"
+            >
+              Атрибут
+            </Text>
+          </div>
+          <div>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="secondary"
+            >
+              Атрибут 3
+            </Text>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="primary"
+            >
+              Атрибут
+            </Text>
+          </div>
+          <div>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="secondary"
+            >
+              Атрибут 4
+            </Text>
+            <Text
+              as="div"
+              align="left"
+              lineHeight="l"
+              size="s"
+              view="primary"
+            >
+              Атрибут
+            </Text>
+          </div>
         </Tree>
 
         <Tree title="Параметры атрибута">

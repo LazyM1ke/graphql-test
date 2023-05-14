@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Text } from '@consta/uikit/Text'
 import TreeProps from './TreeProps.types'
 
-function Tree({ title = 'ТУТТУ', firstHeaderIcon, secondHeaderIcon, children }: TreeProps) {
+function Tree({ title, firstHeaderIcon, secondHeaderIcon, children }: TreeProps) {
   return (
     <TreeContainer>
       <TreeHeader>
@@ -12,7 +12,12 @@ function Tree({ title = 'ТУТТУ', firstHeaderIcon, secondHeaderIcon, childre
       </TreeHeader>
 
       <TreeTitleContainer>
-        <TreeTitle transform="uppercase">{title}</TreeTitle>
+        <TreeTitle
+          transform="uppercase"
+          size="s"
+        >
+          {title}
+        </TreeTitle>
       </TreeTitleContainer>
       {children}
     </TreeContainer>
@@ -36,9 +41,9 @@ const TreeHeader = styled.div`
 const TreeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 19px;
   width: 100%;
   background: #23272a;
-  //max-height: 500px;
   min-height: 100%;
   overflow: scroll;
   position: relative;
