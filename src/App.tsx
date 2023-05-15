@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { GET_OBJ_TEMPLATE, ITemplate } from './graphql/objTemplate'
+import { GET_OBJ_TEMPLATE } from './graphql/objTemplate'
 import { ADD_OBJ_TEMPLATE } from './graphql/addObjTemplate'
 import styled from 'styled-components'
 import { useAppDispatch } from './store/hooks/hooks'
 import { setObjTemplates } from './store/Reducers/ObjTemplateReducer/ObjTemplateSlice'
 import Header from './components/Header/Header'
-import Tree from './components/Tree/Tree'
+import Tree, { TreeContainer } from './components/Tree/Tree'
 import { IconHealth } from '@consta/uikit/IconHealth'
 import { IconEdit } from '@consta/uikit/IconEdit'
 import { TextField } from '@consta/uikit/TextField'
 import { Text } from '@consta/uikit/Text'
 import { Select } from '@consta/uikit/Select'
 import Template from './components/Template/Template'
+import { objTemplate } from './graphql/types/types'
+import { Loader } from '@consta/uikit/Loader'
+import { IconTrash } from '@consta/uikit/IconTrash'
 
 type Item = {
   label: string
@@ -43,6 +46,7 @@ function App() {
   const [addObjTemplate, { loading: addTemplateLoading }] = useMutation(ADD_OBJ_TEMPLATE, {
     refetchQueries: [{ query: GET_OBJ_TEMPLATE }],
   })
+  console.log(data)
 
   useEffect(() => {}, [data])
   const addTemplate = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,10 +69,15 @@ function App() {
   }
 
   if (loading) {
-    return <h1>Loading...</h1>
-  } else {
-    dispatch(setObjTemplates(data.objTemplate))
+    return (
+      <LoaderWrapper>
+        <Loader size="m" />
+      </LoaderWrapper>
+    )
   }
+  // else {
+  //   dispatch(setObjTemplates(data.objTemplate))
+  // }
 
   if (error) return <div>{`Error! ${error.message}`}</div>
 
@@ -91,23 +100,24 @@ function App() {
             />
           }
         >
-          {data.objTemplate.map((template: ITemplate) => (
+          {data.objTemplate.map((template: objTemplate) => (
             <Template
               template={template}
               key={template.id}
             />
           ))}
         </Tree>
+
         <Tree
           title="Сведения"
           firstHeaderIcon={
-            <IconHealth
+            <IconEdit
               size="s"
               view="secondary"
             />
           }
           secondHeaderIcon={
-            <IconEdit
+            <IconTrash
               size="s"
               view="secondary"
             />
@@ -288,6 +298,16 @@ const MainPanel = styled.div`
   display: flex;
   align-content: center;
   flex-direction: row;
+`
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #23272a;
 `
 
 export default App

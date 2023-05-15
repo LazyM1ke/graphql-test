@@ -1,7 +1,7 @@
-import { ITemplate } from '../../graphql/objTemplate'
+import { objTemplate } from '../../graphql/types/types'
 
 interface TemplateProps {
-  template: ITemplate
+  template: objTemplate
 }
 
 export default TemplateProps

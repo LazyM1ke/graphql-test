@@ -1,27 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TreeIcon from '../TreeIcon/TreeIcon'
-import { IconDocBlank } from '@consta/uikit/IconDocBlank'
 import TemplateProps from './TemplateProps.types'
 import { Collapse } from '@consta/uikit/Collapse'
 import styled from 'styled-components'
+import { IconFolders } from '@consta/uikit/IconFolders'
+import { Text } from '@consta/uikit/Text'
 
 function Template({ template }: TemplateProps) {
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <TemplateContainer>
-      <TreeIcon />
-      <Collapse
-        iconPosition="right"
-        label={
-          <CollapseContainer>
-            <IconDocBlank
-              view="secondary"
-              size="s"
-            />
+    <>
+      {template.paramTemplates && template.paramTemplates.length > 0 ? (
+        <TemplateContainer>
+          <CollapseWrapper
+            isOpen={isOpen}
+            onClick={() => setIsOpen(!isOpen)}
+            iconPosition="right"
+            label={
+              <CollapseLabel>
+                <TreeIcon />
+                <IconFolders
+                  view="secondary"
+                  size="xs"
+                />
+                <Text
+                  view="secondary"
+                  size="s"
+                >
+                  {template.name}
+                </Text>
+              </CollapseLabel>
+            }
+          >
+            {template.paramTemplates &&
+              template.paramTemplates.length > 0 &&
+              isOpen &&
+              template.paramTemplates.map((paramTemplate) => (
+                <Template
+                  key={paramTemplate.id}
+                  template={paramTemplate}
+                />
+              ))}
+          </CollapseWrapper>
+        </TemplateContainer>
+      ) : (
+        <TemplateContainer>
+          <IconFolders
+            view="secondary"
+            size="xs"
+          />
+          <Text
+            view="secondary"
+            size="s"
+          >
             {template.name}
-          </CollapseContainer>
-        }
-      ></Collapse>
-    </TemplateContainer>
+          </Text>
+        </TemplateContainer>
+      )}
+    </>
   )
 }
 
@@ -30,9 +66,14 @@ const TemplateContainer = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 12px;
+  padding: 0 10px;
+  cursor: pointer;
+`
+const CollapseWrapper = styled(Collapse)`
+  width: 100%;
 `
 
-const CollapseContainer = styled.div`
+const CollapseLabel = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

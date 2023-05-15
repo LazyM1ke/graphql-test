@@ -10,16 +10,17 @@ function Tree({ title, firstHeaderIcon, secondHeaderIcon, children }: TreeProps)
         {firstHeaderIcon}
         {secondHeaderIcon}
       </TreeHeader>
-
-      <TreeTitleContainer>
-        <TreeTitle
-          transform="uppercase"
-          size="s"
-        >
-          {title}
-        </TreeTitle>
-      </TreeTitleContainer>
-      {children}
+      <TreeContent>
+        <TreeTitleContainer>
+          <TreeTitle
+            transform="uppercase"
+            size="s"
+          >
+            {title}
+          </TreeTitle>
+        </TreeTitleContainer>
+        {children}
+      </TreeContent>
     </TreeContainer>
   )
 }
@@ -38,15 +39,24 @@ const TreeHeader = styled.div`
   }
 `
 
-const TreeContainer = styled.div`
+export const TreeContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 19px;
   width: 100%;
   background: #23272a;
-  min-height: 100%;
+  height: 100vh;
   overflow: scroll;
   position: relative;
+`
+
+const TreeContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  width: 100%;
+  background: #23272a;
+  padding: 0 9px;
 `
 const TreeTitle = styled(Text)`
   font-weight: 700;
