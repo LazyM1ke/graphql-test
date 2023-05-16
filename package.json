@@ -54,5 +54,8 @@
     "@types/styled-components": "^5.1.26",
     "prettier": "2.8.8",
     "typescript": "^5.0.4"
+  },
+  "overrides": {
+    "typescript": "^5.0.4"
   }
 }
