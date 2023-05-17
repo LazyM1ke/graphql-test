@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Text } from '@consta/uikit/Text'
-import TreeProps from './TreeProps.types'
+import React from 'react';
+import styled from 'styled-components';
+import { Text } from '@consta/uikit/Text';
+import TreeProps from './TreeProps.types';
 
-function Tree({ title, firstHeaderIcon, secondHeaderIcon, children }: TreeProps) {
+const Tree = ({ title, firstHeaderIcon, secondHeaderIcon, children }: TreeProps) => {
   return (
     <TreeContainer>
       <TreeHeader>
@@ -12,18 +12,15 @@ function Tree({ title, firstHeaderIcon, secondHeaderIcon, children }: TreeProps)
       </TreeHeader>
       <TreeContent>
         <TreeTitleContainer>
-          <TreeTitle
-            transform="uppercase"
-            size="s"
-          >
+          <TreeTitle transform="uppercase" size="s">
             {title}
           </TreeTitle>
         </TreeTitleContainer>
         {children}
       </TreeContent>
     </TreeContainer>
-  )
-}
+  );
+};
 
 const TreeHeader = styled.div`
   display: flex;
@@ -37,7 +34,7 @@ const TreeHeader = styled.div`
   svg {
     cursor: pointer;
   }
-`
+`;
 
 export const TreeContainer = styled.div`
   display: flex;
@@ -48,7 +45,7 @@ export const TreeContainer = styled.div`
   height: 100vh;
   overflow: scroll;
   position: relative;
-`
+`;
 
 const TreeContent = styled.div`
   display: flex;
@@ -57,15 +54,15 @@ const TreeContent = styled.div`
   width: 100%;
   background: #23272a;
   padding: 0 9px;
-`
+`;
 const TreeTitle = styled(Text)`
   font-weight: 700;
   font-size: 14px;
   line-height: 150%;
   color: white;
-`
+`;
 const TreeTitleContainer = styled.div`
   padding: 14px 16px 22px;
-`
+`;
 
-export default Tree
+export default Tree;

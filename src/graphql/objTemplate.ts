@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 // export interface ITemplate {
 //   code: string
@@ -19,4 +19,4 @@ export const GET_OBJ_TEMPLATE = gql(`
 
   }
 }
-`)
+`);

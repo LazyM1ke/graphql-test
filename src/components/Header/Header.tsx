@@ -1,32 +1,22 @@
-import React, { useState } from 'react'
-import { Text } from '@consta/uikit/Text'
-import { TextField } from '@consta/uikit/TextField'
-import { IconSearch } from '@consta/uikit/IconSearch'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextField';
+import { IconSearch } from '@consta/uikit/IconSearch';
+import styled from 'styled-components';
 
-function Header() {
-  const [value, setValue] = useState<string | null>(null)
-  const handleChange = ({ value }: { value: string | null }) => setValue(value)
+const Header = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StyledHeader>
-      <StyledText
-        weight="bold"
-        transform="uppercase"
-        view="link"
-      >
+      <StyledText weight="bold" transform="uppercase" view="link">
         Тест
       </StyledText>
-      <StyledTextField
-        type="text"
-        value={value}
-        onChange={handleChange}
-        placeholder="Поиск"
-        leftSide={IconSearch}
-      />
+      <StyledTextField type="text" value={value} onChange={handleChange} placeholder="Поиск" leftSide={IconSearch} />
     </StyledHeader>
-  )
-}
+  );
+};
 
 const StyledHeader = styled.div`
   display: flex;
@@ -35,14 +25,14 @@ const StyledHeader = styled.div`
   gap: 32px;
   padding: 10px 24px;
   background-color: #22272b;
-`
+`;
 const StyledText = styled(Text)`
   color: #009bf5;
   font-weight: 700;
   font-size: 18px;
   line-height: 25px;
-`
+`;
 const StyledTextField = styled(TextField)`
   width: 371px;
-`
-export default Header
+`;
+export default Header;
