@@ -10,38 +10,38 @@ export enum ValueTypeEnum {
 }
 
 export interface paramTemplate {
-  objTemplateId: string | any
-  name: String
-  fullName?: String
-  shortName?: String
-  code?: String
-  isArchive?: Boolean
-  isSystem?: Boolean
+  objTemplateId: string | any;
+  name: string;
+  fullName?: string;
+  shortName?: string;
+  code?: string;
+  isArchive?: boolean;
+  isSystem?: boolean;
   // unitId: UUID
   // unit: Unit
   //  paramSettings: ParamSettings!
-  valueType: any
+  valueType: any;
   // paramGroupId: UUID
   // paramGroup: ParamGroup
-  order?: number
+  order?: number;
   // listValues: [ListValue!]!
   // rangeValues: [RangeValue!]!
   // catalogValue: CatalogValue
-  isRemoved: Boolean
-  isActive: Boolean
-  id: string | any
+  isRemoved: boolean;
+  isActive: boolean;
+  id: string | any;
 }
 
 export interface objTemplate {
-  isSystem?: Boolean
-  name: String
-  fullName?: String
-  shortName?: String
-  code?: String
-  isActive: Boolean
-  createdAt?: Date
-  groupId?: string | any
-  paramTemplates?: paramTemplate[]
-  isRemoved?: Boolean
-  id: string | any
+  isSystem?: boolean;
+  name: string;
+  fullName?: string;
+  shortName?: string;
+  code?: string;
+  isActive: boolean;
+  createdAt?: Date;
+  groupId?: string | any;
+  paramTemplates?: paramTemplate[];
+  isRemoved?: boolean;
+  id: string | any;
 }

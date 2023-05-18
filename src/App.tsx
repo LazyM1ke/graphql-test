@@ -37,6 +37,7 @@ const App = () => {
     <div>
       <Header />
       <MainPanel>
+        {/*<Test />*/}
         <TemplateList />
         <Information />
         <Attributes />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField } from '@consta/uikit/TextField';
 import { Select } from '@consta/uikit/Select';
-import Tree from '../Tree/Tree';
+import TemplateLayout from '../TemplateLayout/TemplateLayout';
 
 type Item = {
   label: string;
@@ -26,7 +26,7 @@ const AttributeParams = () => {
   const [values, setValues] = useState<Item | null>();
 
   return (
-    <Tree title="Параметры атрибута">
+    <TemplateLayout title="Параметры атрибута">
       <TextField value="String" label="Код" labelPosition="top" size="s" />
       <TextField value="27.04.2023" label="Дата создания" labelPosition="top" size="s" />
       <Select
@@ -39,7 +39,7 @@ const AttributeParams = () => {
       />
       <TextField value="Новый атрибут" label="Название атрибута" labelPosition="top" size="s" />
       <TextField label="Описание атрибута" type="textarea" rows={4} cols={30} size="s" value="Новый атрибут" />
-    </Tree>
+    </TemplateLayout>
   );
 };
 

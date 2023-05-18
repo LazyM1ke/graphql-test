@@ -13,8 +13,8 @@ export const GET_OBJ_TEMPLATE = gql(`
       objTemplate(order: [{ name: ASC }]) {
         id
         name
-        code
-        isActive
+        shortName
+        fullName
         paramTemplates{ id valueType name isSystem}
 
   }

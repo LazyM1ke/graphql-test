@@ -3,10 +3,12 @@ import { objTemplate } from '../../../graphql/types/types';
 
 interface objTemplateState {
   objTemplates: objTemplate[];
+  activeTemplate: string;
 }
 
 const initialState: objTemplateState = {
   objTemplates: [],
+  activeTemplate: '',
 };
 
 const objTemplateSlice = createSlice({
@@ -14,13 +16,12 @@ const objTemplateSlice = createSlice({
   initialState,
   reducers: {
     setObjTemplates(state, action: PayloadAction<objTemplate[]>) {
-      state.objTemplates = action.payload;
+      if (action.payload) {
+        state.objTemplates = action.payload;
+      }
     },
     setActiveObjTemplate(state, action: PayloadAction<string>) {
-      const template = state.objTemplates.find((temp) => temp.id === action.payload);
-      if (template) {
-        template.isActive = !template.isActive;
-      }
+      state.activeTemplate = action.payload;
     },
   },
 });

@@ -3,19 +3,22 @@ import { IconHealth } from '@consta/uikit/IconHealth';
 import { IconEdit } from '@consta/uikit/IconEdit';
 import { objTemplate } from '../../graphql/types/types';
 import Template from '../Template/Template';
-import Tree from '../Tree/Tree';
+import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { useQuery } from '@apollo/client';
 import { GET_OBJ_TEMPLATE } from '../../graphql/objTemplate';
 import { Loader } from '@consta/uikit/Loader';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
+import { setObjTemplates } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
 
 interface ObjTemplateData {
   objTemplate: objTemplate[];
 }
 
 const TemplateList = () => {
+  const dispatch = useAppDispatch();
+  const activeTemplate = useAppSelector((state) => state.ObjTemplateSlice.activeTemplate);
   const { data, loading, error } = useQuery<ObjTemplateData>(GET_OBJ_TEMPLATE);
-  console.log(data);
 
   if (error) return <div>{`Error! ${error.message}`}</div>;
 
@@ -25,18 +28,22 @@ const TemplateList = () => {
         <Loader size="m" />
       </LoaderWrapper>
     );
+  } else {
+    if (data?.objTemplate) {
+      dispatch(setObjTemplates(data?.objTemplate));
+    }
   }
 
   return (
-    <Tree
+    <TemplateLayout
       title="Шаблоны"
       firstHeaderIcon={<IconHealth size="s" view="secondary" />}
       secondHeaderIcon={<IconEdit size="s" view="secondary" />}
     >
       {data?.objTemplate.map((template: objTemplate) => (
-        <Template template={template} key={template.id} />
+        <Template activeTemplate={activeTemplate} template={template} key={template.id} />
       ))}
-    </Tree>
+    </TemplateLayout>
   );
 };
 

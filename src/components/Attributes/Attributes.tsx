@@ -1,12 +1,12 @@
 import React from 'react';
-import Tree from '../Tree/Tree';
+import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { IconHealth } from '@consta/uikit/IconHealth';
 import { IconEdit } from '@consta/uikit/IconEdit';
 import { Text } from '@consta/uikit/Text';
 
 const Attributes = () => {
   return (
-    <Tree
+    <TemplateLayout
       title="Атрибуты"
       firstHeaderIcon={<IconHealth size="s" view="secondary" />}
       secondHeaderIcon={<IconEdit size="s" view="secondary" />}
@@ -43,7 +43,7 @@ const Attributes = () => {
           Атрибут
         </Text>
       </div>
-    </Tree>
+    </TemplateLayout>
   );
 };
 
