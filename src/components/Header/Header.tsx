@@ -5,15 +5,21 @@ import { IconSearch } from '@consta/uikit/IconSearch';
 import styled from 'styled-components';
 
 const Header = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+  const [inputValue, setInputValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setInputValue(value);
 
   return (
     <StyledHeader>
       <StyledText weight="bold" transform="uppercase" view="link">
         Тест
       </StyledText>
-      <StyledTextField type="text" value={value} onChange={handleChange} placeholder="Поиск" leftSide={IconSearch} />
+      <StyledTextField
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+        placeholder="Поиск"
+        leftSide={IconSearch}
+      />
     </StyledHeader>
   );
 };
