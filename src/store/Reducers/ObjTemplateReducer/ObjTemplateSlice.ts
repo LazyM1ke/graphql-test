@@ -32,8 +32,14 @@ const objTemplateSlice = createSlice({
       const newObjIndex = state?.objTemplates.findIndex((_) => _.id === templateId);
       state.objTemplates[newObjIndex][key] = value;
     },
+    deleteObjTemplate(state, action: PayloadAction<string>) {
+      const templateId = action.payload;
+      const newObjIndex = state?.objTemplates.findIndex((_) => _.id === templateId);
+      state.objTemplates.splice(newObjIndex, 1);
+    },
   },
 });
 
 export default objTemplateSlice.reducer;
-export const { setObjTemplates, setActiveObjTemplate, changeTemplateData } = objTemplateSlice.actions;
+export const { setObjTemplates, setActiveObjTemplate, changeTemplateData, deleteObjTemplate } =
+  objTemplateSlice.actions;

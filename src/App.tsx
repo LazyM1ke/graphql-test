@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Header from './components/Header/Header';
 import TemplateList from './components/TemplateList/TemplateList';
 import Information from './components/Information/Information';
-import Attributes from './components/Attributes/Attributes';
 import AttributeParams from './components/AttributeParams/AttributeParams';
+import AttributeList from './components/AttributeList/AttributeList';
 
 const App = () => {
   // const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ const App = () => {
         {/*<Test />*/}
         <TemplateList />
         <Information />
-        <Attributes />
+        <AttributeList />
         <AttributeParams />
       </MainPanel>
     </div>

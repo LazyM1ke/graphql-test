@@ -6,7 +6,7 @@ import { Text } from '@consta/uikit/Text';
 import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
 import { objTemplate } from '../../graphql/types/types';
-import { changeTemplateData } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
+import { changeTemplateData, deleteObjTemplate } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
 import { Button } from '@consta/uikit/Button';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
@@ -79,7 +79,6 @@ const Information = () => {
       firstHeaderIcon={
         <Button onlyIcon size="xs" iconLeft={IconEdit} form="round" view="ghost" onClick={() => setIsEdit(!isEdit)} />
       }
-      secondHeaderIcon={<Button onlyIcon size="xs" iconLeft={IconTrash} form="round" view="ghost" />}
     >
       <TextField
         value={templateName}
