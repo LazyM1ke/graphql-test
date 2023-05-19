@@ -1,15 +1,15 @@
 import React from 'react';
 import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { IconHealth } from '@consta/uikit/IconHealth';
-import { IconEdit } from '@consta/uikit/IconEdit';
 import { Text } from '@consta/uikit/Text';
+import { IconTrash } from '@consta/uikit/IconTrash';
 
 const Attributes = () => {
   return (
     <TemplateLayout
       title="Атрибуты"
       firstHeaderIcon={<IconHealth size="s" view="secondary" />}
-      secondHeaderIcon={<IconEdit size="s" view="secondary" />}
+      secondHeaderIcon={<IconTrash size="s" view="secondary" />}
     >
       <div>
         <Text as="div" align="left" lineHeight="l" size="s" view="secondary">

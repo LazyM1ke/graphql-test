@@ -17,6 +17,7 @@ interface ObjTemplateData {
 
 const TemplateList = () => {
   const dispatch = useAppDispatch();
+  const templates = useAppSelector((state) => state.ObjTemplateSlice.objTemplates);
   const activeTemplate = useAppSelector((state) => state.ObjTemplateSlice.activeTemplate);
   const { data, loading, error } = useQuery<ObjTemplateData>(GET_OBJ_TEMPLATE);
 
@@ -33,14 +34,13 @@ const TemplateList = () => {
       dispatch(setObjTemplates(data?.objTemplate));
     }
   }
-
   return (
     <TemplateLayout
       title="Шаблоны"
       firstHeaderIcon={<IconHealth size="s" view="secondary" />}
       secondHeaderIcon={<IconEdit size="s" view="secondary" />}
     >
-      {data?.objTemplate.map((template: objTemplate) => (
+      {templates?.map((template: objTemplate) => (
         <Template activeTemplate={activeTemplate} template={template} key={template.id} />
       ))}
     </TemplateLayout>
