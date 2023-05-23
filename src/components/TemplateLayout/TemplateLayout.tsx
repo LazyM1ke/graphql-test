@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Text } from '@consta/uikit/Text';
 import TemplateLayoutProps from './TemplateLayoutProps.types';
 
-const TemplateLayout = ({ title, firstHeaderIcon, secondHeaderIcon, children, bgColor }: TemplateLayoutProps) => {
+const TemplateLayout = ({ title, firstHeaderIcon, secondHeaderIcon, children }: TemplateLayoutProps) => {
   return (
     <TemplateLayoutContainer>
       <TemplateLayoutHeader>
@@ -42,7 +42,7 @@ export const TemplateLayoutContainer = styled.div`
   gap: 19px;
   width: 100%;
   background-color: #23272a;
-  height: 100vh;
+  height: 100%;
   overflow: scroll;
   position: relative;
 `;

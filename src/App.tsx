@@ -46,11 +46,11 @@ const App = () => {
     </div>
   );
 };
-
 const MainPanel = styled.div`
   display: flex;
   align-content: center;
   flex-direction: row;
+  height: 100vh;
 `;
 
 export default App;
