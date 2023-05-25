@@ -7,13 +7,30 @@ import { IconFolders } from '@consta/uikit/IconFolders';
 import { Text } from '@consta/uikit/Text';
 import { useAppDispatch } from '../../store/hooks/hooks';
 import { setActiveObjTemplate } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
+import { useLazyQuery } from '@apollo/client';
+import { GET_PARAMS_TEMPLATES } from '../../graphql/paramTemplate';
+import { paramTemplate } from '../../graphql/types/types';
+import { setParamsTemplates } from '../../store/Reducers/AttributeParamReducer/ObjParamReducer';
 
+interface ParamTemplateData {
+  paramTemplate: paramTemplate[];
+}
 const Template = ({ template, activeTemplate }: TemplateProps) => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const handleOnclick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, templateId: string) => {
+  const [getTemplateAttributes, { loading: TemplateAttributesLoading, error: TemplateAttributesError }] =
+    useLazyQuery<ParamTemplateData>(GET_PARAMS_TEMPLATES);
+  const handleOnclick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>, templateId: string) => {
     e.preventDefault();
     dispatch(setActiveObjTemplate(templateId));
+    const response = await getTemplateAttributes({
+      variables: {
+        objTemplateId: templateId,
+      },
+    });
+    if (response.data?.paramTemplate) {
+      dispatch(setParamsTemplates(response.data?.paramTemplate));
+    }
   };
   return (
     <>
@@ -39,8 +56,8 @@ const Template = ({ template, activeTemplate }: TemplateProps) => {
           >
             {template.paramTemplates?.length &&
               isOpen &&
-              template.paramTemplates.map((paramTemplate) => (
-                <Template activeTemplate={activeTemplate} key={paramTemplate.id} template={paramTemplate} />
+              template.paramTemplates.map((item) => (
+                <Template activeTemplate={activeTemplate} key={item.id} template={item} />
               ))}
           </CollapseWrapper>
         </TemplateContainer>

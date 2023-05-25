@@ -1,3 +1,5 @@
+import { UUID } from 'crypto';
+
 export enum ValueTypeEnum {
   NUMBER,
   STRING,
@@ -10,7 +12,7 @@ export enum ValueTypeEnum {
 }
 
 export interface paramTemplate {
-  objTemplateId: string | any;
+  objTemplateId: UUID;
   name: string;
   fullName?: string;
   shortName?: string;

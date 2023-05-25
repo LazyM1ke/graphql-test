@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { objTemplate, paramTemplate } from '../../../graphql/types/types';
+import { paramTemplate } from '../../../graphql/types/types';
 
 interface ParamTemplateState {
   paramsTemplates: paramTemplate[];

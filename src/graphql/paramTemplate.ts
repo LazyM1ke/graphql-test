@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_PARAMS_TEMPLATES = gql(`
-    query {
-        paramTemplate(order: [{ name: ASC }]) {
+    query paramTemplate($objTemplateId: UUID) {
+        paramTemplate(order: [{ name: ASC }], where: {objTemplateId: {eq: $objTemplateId}}) {
             id
             name
             shortName
@@ -10,6 +10,11 @@ export const GET_PARAMS_TEMPLATES = gql(`
             isActive
             isSystem
             isRemoved
+            code
+            paramGroup {
+                groupName
+                id
+            }
         }
     }
 `);

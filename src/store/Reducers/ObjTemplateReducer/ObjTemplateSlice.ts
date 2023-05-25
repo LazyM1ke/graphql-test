@@ -10,7 +10,7 @@ const initialState: objTemplateState = {
   objTemplates: [],
   activeTemplate: '',
 };
-export type ChangeTempateDataType = {
+export type ChangeTemplateDataType = {
   templateId: string;
   key: keyof Pick<objTemplate, 'shortName' | 'fullName'>;
   value: string;
@@ -27,7 +27,7 @@ const objTemplateSlice = createSlice({
     setActiveObjTemplate(state, action: PayloadAction<string>) {
       state.activeTemplate = action.payload;
     },
-    changeTemplateData(state, action: PayloadAction<ChangeTempateDataType>) {
+    changeTemplateData(state, action: PayloadAction<ChangeTemplateDataType>) {
       const { templateId, key, value } = action.payload;
       const newObjIndex = state?.objTemplates.findIndex((_) => _.id === templateId);
       state.objTemplates[newObjIndex][key] = value;
