@@ -4,11 +4,13 @@ import { paramTemplate } from '../../../graphql/types/types';
 interface ParamTemplateState {
   paramsTemplates: paramTemplate[];
   activeParam: string;
+  isLoading: boolean;
 }
 
 const initialState: ParamTemplateState = {
   paramsTemplates: [],
   activeParam: '',
+  isLoading: false,
 };
 
 const objParamSlice = createSlice({
@@ -23,8 +25,11 @@ const objParamSlice = createSlice({
     setActiveParam(state, action: PayloadAction<string>) {
       state.activeParam = action.payload;
     },
+    setParamLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
+    },
   },
 });
 
 export default objParamSlice.reducer;
-export const { setParamsTemplates, setActiveParam } = objParamSlice.actions;
+export const { setParamLoading, setParamsTemplates, setActiveParam } = objParamSlice.actions;

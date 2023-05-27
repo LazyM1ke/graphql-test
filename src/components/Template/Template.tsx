@@ -5,12 +5,12 @@ import { Collapse } from '@consta/uikit/Collapse';
 import styled from 'styled-components';
 import { IconFolders } from '@consta/uikit/IconFolders';
 import { Text } from '@consta/uikit/Text';
-import { useAppDispatch } from '../../store/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
 import { setActiveObjTemplate } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PARAMS_TEMPLATES } from '../../graphql/paramTemplate';
 import { paramTemplate } from '../../graphql/types/types';
-import { setParamsTemplates } from '../../store/Reducers/AttributeParamReducer/ObjParamReducer';
+import { setParamLoading, setParamsTemplates } from '../../store/Reducers/AttributeParamReducer/ObjParamReducer';
 
 interface ParamTemplateData {
   paramTemplate: paramTemplate[];
@@ -22,6 +22,7 @@ const Template = ({ template, activeTemplate }: TemplateProps) => {
     useLazyQuery<ParamTemplateData>(GET_PARAMS_TEMPLATES);
   const handleOnclick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>, templateId: string) => {
     e.preventDefault();
+    dispatch(setParamLoading(true));
     dispatch(setActiveObjTemplate(templateId));
     const response = await getTemplateAttributes({
       variables: {
@@ -30,6 +31,7 @@ const Template = ({ template, activeTemplate }: TemplateProps) => {
     });
     if (response.data?.paramTemplate) {
       dispatch(setParamsTemplates(response.data?.paramTemplate));
+      dispatch(setParamLoading(false));
     }
   };
   return (

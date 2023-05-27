@@ -5,10 +5,20 @@ import { IconTrash } from '@consta/uikit/IconTrash';
 import Attribute from '../Attribute/Attribute';
 import styled from 'styled-components';
 import { useAppSelector } from '../../store/hooks/hooks';
+import { Loader } from '@consta/uikit/Loader';
 
 const AttributeList = () => {
   const activeParam = useAppSelector((state) => state.objParamSlice.activeParam);
   const params = useAppSelector((state) => state.objParamSlice.paramsTemplates);
+  const isParamLoading = useAppSelector((state) => state.objParamSlice.isLoading);
+
+  if (isParamLoading) {
+    return (
+      <LoaderWrapper>
+        <Loader size="m" />
+      </LoaderWrapper>
+    );
+  }
 
   return (
     <TemplateLayout
