@@ -11,6 +11,9 @@ export const GET_PARAMS_TEMPLATES = gql(`
             isSystem
             isRemoved
             code
+            objTemplate {
+               createdAt
+            }
             paramGroup {
                 groupName
                 id
