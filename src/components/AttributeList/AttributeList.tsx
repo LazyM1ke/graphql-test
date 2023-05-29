@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { IconHealth } from '@consta/uikit/IconHealth';
 import { IconTrash } from '@consta/uikit/IconTrash';
 import Attribute from '../Attribute/Attribute';
 import styled from 'styled-components';
-import { useAppSelector } from '../../store/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
 import { Loader } from '@consta/uikit/Loader';
-import DeleteModal from '../DeleteModal/DeleteModal';
+import { Button } from '@consta/uikit/Button';
+import { setDeleteModal } from '../../store/Reducers/AttributeParamReducer/ObjParamReducer';
 
 const AttributeList = () => {
+  const dispatch = useAppDispatch();
   const activeParam = useAppSelector((state) => state.objParamSlice.activeParam);
   const params = useAppSelector((state) => state.objParamSlice.paramsTemplates);
   const isParamLoading = useAppSelector((state) => state.objParamSlice.isLoading);
@@ -23,13 +25,21 @@ const AttributeList = () => {
   return (
     <TemplateLayout
       title="Атрибуты"
-      firstHeaderIcon={<IconHealth size="s" view="secondary" />}
-      secondHeaderIcon={<IconTrash size="s" view="secondary" />}
+      firstHeaderIcon={<Button onlyIcon size="xs" iconLeft={IconHealth} form="round" view="ghost" />}
+      secondHeaderIcon={
+        <Button
+          onlyIcon
+          size="xs"
+          iconLeft={IconTrash}
+          form="round"
+          view="ghost"
+          onClick={() => dispatch(setDeleteModal(true))}
+        />
+      }
     >
       {params.map((param, idx) => (
         <Attribute idx={idx} key={param.id} param={param} activeParam={activeParam} />
       ))}
-      <DeleteModal />
     </TemplateLayout>
   );
 };

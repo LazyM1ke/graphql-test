@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { Button } from '@consta/uikit/Button';
 import { useAppSelector } from '../../store/hooks/hooks';
 import moment from 'moment';
-import DeleteModal from '../DeleteModal/DeleteModal';
 
 type Item = {
   label: string;
@@ -38,7 +37,6 @@ const AttributeParams = () => {
       return null;
     }
   });
-  console.log(activeAttribute);
   const groupValues = useAppSelector((state) => state.objParamSlice.paramsTemplates.map((group) => group?.paramGroup));
   const [createdAt, setCreatedAt] = useState<Date | null>(activeAttribute?.objTemplate?.createdAt || null);
   const [group, setGroup] = useState<Item | null>();

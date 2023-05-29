@@ -5,12 +5,14 @@ interface ParamTemplateState {
   paramsTemplates: paramTemplate[];
   activeParam: string;
   isLoading: boolean;
+  deleteModalOpened: boolean;
 }
 
 const initialState: ParamTemplateState = {
   paramsTemplates: [],
   activeParam: '',
   isLoading: false,
+  deleteModalOpened: false,
 };
 
 const objParamSlice = createSlice({
@@ -28,8 +30,11 @@ const objParamSlice = createSlice({
     setParamLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
+    setDeleteModal(state, action: PayloadAction<boolean>) {
+      state.deleteModalOpened = action.payload;
+    },
   },
 });
 
 export default objParamSlice.reducer;
-export const { setParamLoading, setParamsTemplates, setActiveParam } = objParamSlice.actions;
+export const { setDeleteModal, setParamLoading, setParamsTemplates, setActiveParam } = objParamSlice.actions;
