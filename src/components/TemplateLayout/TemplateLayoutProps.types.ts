@@ -6,6 +6,7 @@ interface TreeProps {
   secondHeaderIcon?: React.ReactNode;
   children?: React.ReactNode;
   bgColor?: string;
+  padding?: string;
 }
 
 export default TreeProps;

@@ -46,6 +46,7 @@ const AttributeContainer = styled.div<{ currentParam: string; activeParam: strin
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
+  padding: 0 11px;
   background-color: ${(props) => (props.activeParam === props.currentParam ? '#919598' : 'none')};
 `;
 export default Attribute;

@@ -36,6 +36,7 @@ const TemplateList = () => {
   }
   return (
     <TemplateLayout
+      bgColor="#23272a"
       title="Шаблоны"
       firstHeaderIcon={<IconHealth size="s" view="secondary" />}
       secondHeaderIcon={<IconEdit size="s" view="secondary" />}

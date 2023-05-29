@@ -24,6 +24,7 @@ const AttributeList = () => {
 
   return (
     <TemplateLayout
+      bgColor="#161A1D"
       title="Атрибуты"
       firstHeaderIcon={<Button onlyIcon size="xs" iconLeft={IconHealth} form="round" view="ghost" />}
       secondHeaderIcon={

@@ -3,14 +3,21 @@ import styled from 'styled-components';
 import { Text } from '@consta/uikit/Text';
 import TemplateLayoutProps from './TemplateLayoutProps.types';
 
-const TemplateLayout = ({ title, firstHeaderIcon, secondHeaderIcon, children }: TemplateLayoutProps) => {
+const TemplateLayout = ({
+  title,
+  firstHeaderIcon,
+  secondHeaderIcon,
+  children,
+  padding,
+  bgColor,
+}: TemplateLayoutProps) => {
   return (
-    <TemplateLayoutContainer>
+    <TemplateLayoutContainer $bgColor={bgColor}>
       <TemplateLayoutHeader>
         {firstHeaderIcon}
         {secondHeaderIcon}
       </TemplateLayoutHeader>
-      <TemplateLayoutContent>
+      <TemplateLayoutContent $bgColor={bgColor} $padding={padding}>
         <TemplateLayoutTitleContainer>
           <TemplateLayoutTitle transform="uppercase" size="s">
             {title}
@@ -36,24 +43,24 @@ const TemplateLayoutHeader = styled.div`
   }
 `;
 
-export const TemplateLayoutContainer = styled.div`
+export const TemplateLayoutContainer = styled.div<{ $bgColor?: string }>`
   display: flex;
   flex-direction: column;
   gap: 19px;
   width: 100%;
-  background-color: #23272a;
+  background-color: ${(props) => props.$bgColor};
   height: 100%;
   overflow: scroll;
   position: relative;
 `;
 
-const TemplateLayoutContent = styled.div`
+const TemplateLayoutContent = styled.div<{ $padding?: string; $bgColor?: string }>`
   display: flex;
   flex-direction: column;
   gap: 19px;
   width: 100%;
-  background: #23272a;
-  //padding: 0 9px;
+  background-color: ${(props) => props.$bgColor};
+  padding: ${(props) => props.$padding};
 `;
 const TemplateLayoutTitle = styled(Text)`
   font-weight: 700;

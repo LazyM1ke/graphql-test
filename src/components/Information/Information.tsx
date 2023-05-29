@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { IconEdit } from '@consta/uikit/IconEdit';
-import { IconTrash } from '@consta/uikit/IconTrash';
 import { TextField } from '@consta/uikit/TextField';
 import { Text } from '@consta/uikit/Text';
 import TemplateLayout from '../TemplateLayout/TemplateLayout';
@@ -75,6 +74,8 @@ const Information = () => {
 
   return (
     <TemplateLayout
+      bgColor="#23272a"
+      padding="0 8px"
       title="Сведения"
       firstHeaderIcon={
         <Button onlyIcon size="xs" iconLeft={IconEdit} form="round" view="ghost" onClick={() => setIsEdit(!isEdit)} />

@@ -70,7 +70,7 @@ const AttributeParams = () => {
   };
 
   return (
-    <TemplateLayout title="Параметры атрибута">
+    <TemplateLayout title="Параметры атрибута" bgColor="#161A1D" padding="0 10px">
       <TextField
         value={paramCode}
         label="Код"
