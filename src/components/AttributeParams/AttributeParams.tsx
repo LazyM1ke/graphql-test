@@ -6,6 +6,8 @@ import { Checkbox } from '@consta/uikit/Checkbox';
 import styled from 'styled-components';
 import { Button } from '@consta/uikit/Button';
 import { useAppSelector } from '../../store/hooks/hooks';
+import moment from 'moment';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 type Item = {
   label: string;
@@ -36,7 +38,10 @@ const AttributeParams = () => {
       return null;
     }
   });
-  const [values, setValues] = useState<Item | null>();
+  console.log(activeAttribute);
+  const groupValues = useAppSelector((state) => state.objParamSlice.paramsTemplates.map((group) => group?.paramGroup));
+  const [createdAt, setCreatedAt] = useState<Date | null>(activeAttribute?.objTemplate?.createdAt || null);
+  const [group, setGroup] = useState<Item | null>();
 
   const [paramCode, setParamCode] = useState<string | null>(activeAttribute?.code || '');
   const [paramName, setParamName] = useState<string | null>(activeAttribute?.name || '');
@@ -53,7 +58,18 @@ const AttributeParams = () => {
     setIsActive(activeAttribute?.isActive || false);
     setIsSystem(activeAttribute?.isSystem || false);
     setIsArchive(activeAttribute?.isArchive || false);
+    setCreatedAt(activeAttribute?.objTemplate?.createdAt || null);
   }, [activeAttribute]);
+
+  const handleOnCancel = () => {
+    setParamCode(activeAttribute?.code || '');
+    setParamName(activeAttribute?.name || '');
+    setParamName(activeAttribute?.name || '');
+    setIsActive(activeAttribute?.isActive || false);
+    setIsSystem(activeAttribute?.isSystem || false);
+    setIsArchive(activeAttribute?.isArchive || false);
+    setCreatedAt(activeAttribute?.objTemplate?.createdAt || null);
+  };
 
   return (
     <TemplateLayout title="Параметры атрибута">
@@ -64,14 +80,20 @@ const AttributeParams = () => {
         size="s"
         onChange={({ value }) => setParamCode(value)}
       />
-      <TextField value="27.04.2023" label="Дата создания" labelPosition="top" size="s" />
+      <TextField
+        value={moment(createdAt).format('DD.MM.YYYY')}
+        label="Дата создания"
+        labelPosition="top"
+        size="s"
+        // onChange={({ value }) => setCreatedAt(value)}
+      />
       <Select
         placeholder="Группа атрибутов"
         label="Группа"
         size="s"
         items={items}
-        value={values}
-        onChange={({ value }) => setValues(value)}
+        value={group}
+        onChange={({ value }) => setGroup(value)}
       />
       <TextField
         value={paramName}
@@ -96,7 +118,7 @@ const AttributeParams = () => {
       </CheckboxiesContainer>
       <ButtonsContainer>
         <Button label="Сохранить" size="s" />
-        <Button label="Отменить" view="secondary" size="s" />
+        <Button label="Отменить" view="secondary" size="s" onClick={handleOnCancel} />
       </ButtonsContainer>
     </TemplateLayout>
   );

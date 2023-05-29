@@ -6,12 +6,12 @@ import Attribute from '../Attribute/Attribute';
 import styled from 'styled-components';
 import { useAppSelector } from '../../store/hooks/hooks';
 import { Loader } from '@consta/uikit/Loader';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 const AttributeList = () => {
   const activeParam = useAppSelector((state) => state.objParamSlice.activeParam);
   const params = useAppSelector((state) => state.objParamSlice.paramsTemplates);
   const isParamLoading = useAppSelector((state) => state.objParamSlice.isLoading);
-
   if (isParamLoading) {
     return (
       <LoaderWrapper>
@@ -29,6 +29,7 @@ const AttributeList = () => {
       {params.map((param, idx) => (
         <Attribute idx={idx} key={param.id} param={param} activeParam={activeParam} />
       ))}
+      <DeleteModal />
     </TemplateLayout>
   );
 };

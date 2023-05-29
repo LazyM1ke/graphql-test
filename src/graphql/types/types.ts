@@ -11,6 +11,14 @@ export enum ValueTypeEnum {
   CATALOG,
 }
 
+export interface ParamGroup {
+  groupName: string;
+  id: UUID;
+  objTemplate: objTemplate;
+  objTemplateId: UUID;
+  sortPosition: number;
+}
+
 export interface paramTemplate {
   objTemplateId: UUID;
   name: string;
@@ -23,8 +31,9 @@ export interface paramTemplate {
   // unit: Unit
   //  paramSettings: ParamSettings!
   valueType: any;
-  // paramGroupId: UUID
-  // paramGroup: ParamGroup
+  objTemplate?: objTemplate;
+  paramGroupId: UUID;
+  paramGroup: ParamGroup;
   order?: number;
   // listValues: [ListValue!]!
   // rangeValues: [RangeValue!]!

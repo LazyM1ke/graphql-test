@@ -4,7 +4,7 @@ import { IconArrowRight } from '@consta/uikit/IconArrowRight';
 import styled from 'styled-components';
 import AttributeProps from './AttributeProps.types';
 import { setActiveParam } from '../../store/Reducers/AttributeParamReducer/ObjParamReducer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
+import { useAppDispatch } from '../../store/hooks/hooks';
 
 const Attribute = ({ param, activeParam, idx }: AttributeProps) => {
   const dispatch = useAppDispatch();
