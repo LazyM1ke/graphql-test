@@ -7,24 +7,30 @@ import styled from 'styled-components';
 import { Button } from '@consta/uikit/Button';
 import { useAppSelector } from '../../store/hooks/hooks';
 import moment from 'moment';
+import { UUID } from 'crypto';
 
-type Item = {
+type Group = {
   label: string;
-  id: number;
+  id: UUID;
 };
 
-const items: Item[] = [
+type SelectItem = {
+  label: string;
+  id: string;
+};
+
+const items: SelectItem[] = [
   {
     label: 'Первый',
-    id: 1,
+    id: '1',
   },
   {
     label: 'Второй',
-    id: 2,
+    id: '2',
   },
   {
     label: 'Третий',
-    id: 3,
+    id: '3',
   },
 ];
 const AttributeParams = () => {
@@ -37,9 +43,23 @@ const AttributeParams = () => {
       return null;
     }
   });
-  const groupValues = useAppSelector((state) => state.objParamSlice.paramsTemplates.map((group) => group?.paramGroup));
+
+  const units = useAppSelector((state) => {
+    const unitList = state.unitSlice.unitList.map((unit) => ({
+      id: unit.id,
+      label: `${unit.name} ${unit.symbol}`,
+    }));
+    return unitList;
+  });
+  // const groupValues = useAppSelector((state) =>
+  //   state.objParamSlice.paramsTemplates.map((paramTemplate) => ({
+  //     id: paramTemplate.paramGroup.id,
+  //     label: paramTemplate.paramGroup.groupName,
+  //   })),
+  // );
   const [createdAt, setCreatedAt] = useState<Date | null>(activeAttribute?.objTemplate?.createdAt || null);
-  const [group, setGroup] = useState<Item | null>();
+  const [group, setGroup] = useState<SelectItem | null>(null);
+  const [unit, setUnit] = useState<SelectItem | null>(null);
 
   const [paramCode, setParamCode] = useState<string | null>(activeAttribute?.code || '');
   const [paramName, setParamName] = useState<string | null>(activeAttribute?.name || '');
@@ -52,17 +72,16 @@ const AttributeParams = () => {
   useEffect(() => {
     setParamCode(activeAttribute?.code || '');
     setParamName(activeAttribute?.name || '');
-    setParamName(activeAttribute?.name || '');
+    setParamDesc(activeAttribute?.fullName || '');
     setIsActive(activeAttribute?.isActive || false);
     setIsSystem(activeAttribute?.isSystem || false);
     setIsArchive(activeAttribute?.isArchive || false);
     setCreatedAt(activeAttribute?.objTemplate?.createdAt || null);
   }, [activeAttribute]);
-
   const handleOnCancel = () => {
     setParamCode(activeAttribute?.code || '');
     setParamName(activeAttribute?.name || '');
-    setParamName(activeAttribute?.name || '');
+    setParamDesc(activeAttribute?.fullName || '');
     setIsActive(activeAttribute?.isActive || false);
     setIsSystem(activeAttribute?.isSystem || false);
     setIsArchive(activeAttribute?.isArchive || false);
@@ -92,6 +111,14 @@ const AttributeParams = () => {
         items={items}
         value={group}
         onChange={({ value }) => setGroup(value)}
+      />
+      <Select
+        placeholder="Единицы измерения"
+        label="Группа"
+        size="s"
+        items={units}
+        value={unit}
+        onChange={({ value }) => setUnit(value)}
       />
       <TextField
         value={paramName}

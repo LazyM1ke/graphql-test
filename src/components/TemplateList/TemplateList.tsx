@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IconHealth } from '@consta/uikit/IconHealth';
 import { IconEdit } from '@consta/uikit/IconEdit';
-import { objTemplate } from '../../graphql/types/types';
+import { objTemplate, Unit } from '../../graphql/types/types';
 import Template from '../Template/Template';
 import TemplateLayout from '../TemplateLayout/TemplateLayout';
 import { useQuery } from '@apollo/client';
@@ -10,9 +10,19 @@ import { Loader } from '@consta/uikit/Loader';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks';
 import { setObjTemplates } from '../../store/Reducers/ObjTemplateReducer/ObjTemplateSlice';
+import { GET_UNITS } from '../../graphql/units';
+import { setUnitList } from '../../store/Reducers/UnitReducer/UnitReducer';
 
 interface ObjTemplateData {
   objTemplate: objTemplate[];
+}
+interface UnitsData {
+  nodes: Unit[];
+  totalCount: number;
+}
+
+interface UnitsQueryData {
+  unit: UnitsData;
 }
 
 const TemplateList = () => {
@@ -20,10 +30,11 @@ const TemplateList = () => {
   const templates = useAppSelector((state) => state.ObjTemplateSlice.objTemplates);
   const activeTemplate = useAppSelector((state) => state.ObjTemplateSlice.activeTemplate);
   const { data, loading, error } = useQuery<ObjTemplateData>(GET_OBJ_TEMPLATE);
+  const { data: unitsData, loading: unitsLoading, error: unitsError } = useQuery<UnitsQueryData>(GET_UNITS);
 
   if (error) return <div>{`Error! ${error.message}`}</div>;
 
-  if (loading) {
+  if (loading || unitsLoading) {
     return (
       <LoaderWrapper>
         <Loader size="m" />
@@ -32,6 +43,9 @@ const TemplateList = () => {
   } else {
     if (data?.objTemplate) {
       dispatch(setObjTemplates(data?.objTemplate));
+    }
+    if (unitsData?.unit.nodes) {
+      dispatch(setUnitList(unitsData?.unit.nodes));
     }
   }
   return (

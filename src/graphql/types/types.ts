@@ -56,3 +56,11 @@ export interface objTemplate {
   isRemoved?: boolean;
   id: string | any;
 }
+
+export interface Unit {
+  id: UUID;
+  isRemoved: boolean;
+  kod: string;
+  name: string;
+  symbol: string;
+}
