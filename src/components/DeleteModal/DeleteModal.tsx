@@ -29,6 +29,8 @@ const DeleteModal = () => {
     return <div>{error.message}</div>;
   }
 
+  console.log(activeAttribute?.id);
+
   const handleDeleteParam = () => {
     dispatch(setParamLoading(true));
     deleteParamTemplate({

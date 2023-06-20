@@ -8,7 +8,11 @@ import { Button } from '@consta/uikit/Button';
 import { useAppSelector } from '../../store/hooks/hooks';
 import moment from 'moment';
 import { UUID } from 'crypto';
+import { useMutation } from '@apollo/client';
+import { PARAM_TEMPLATE_UPDATE } from '../../graphql/paramTemplateUpdate';
+import { GET_PARAMS_TEMPLATES } from '../../graphql/paramTemplate';
 
+// interface ParamTemplateUpdateData {}
 type Group = {
   label: string;
   id: UUID;
@@ -34,6 +38,9 @@ const items: SelectItem[] = [
   },
 ];
 const AttributeParams = () => {
+  const [updateObjTemplate, { loading: updateObjTemplateLoading, data }] = useMutation(PARAM_TEMPLATE_UPDATE, {
+    refetchQueries: [{ query: GET_PARAMS_TEMPLATES }],
+  });
   const activeAttribute = useAppSelector((state) => {
     const attributes = state.objParamSlice.paramsTemplates;
     const activeAttr = attributes.filter((attribute) => attribute.id === state.objParamSlice.activeParam);
@@ -88,6 +95,28 @@ const AttributeParams = () => {
     setCreatedAt(activeAttribute?.objTemplate?.createdAt || null);
   };
 
+  console.log(data);
+
+  const handleOnSave = () => {
+    updateObjTemplate({
+      variables: {
+        Input: [
+          {
+            code: paramCode,
+            fullName: paramName,
+            id: activeAttribute?.id,
+            isActive: isActive,
+            isArchive: isArchive,
+            isSystem: isSystem,
+            name: paramName,
+            objTemplateId: activeAttribute?.objTemplate?.id,
+            valueType: 1,
+          },
+        ],
+      },
+    });
+  };
+
   return (
     <TemplateLayout title="Параметры атрибута" bgColor="#161A1D" padding="0 10px">
       <TextField
@@ -97,6 +126,7 @@ const AttributeParams = () => {
         size="s"
         onChange={({ value }) => setParamCode(value)}
       />
+
       <TextField
         value={moment(createdAt).format('DD.MM.YYYY')}
         label="Дата создания"
@@ -114,7 +144,7 @@ const AttributeParams = () => {
       />
       <Select
         placeholder="Единицы измерения"
-        label="Группа"
+        label="Единицы измерения"
         size="s"
         items={units}
         value={unit}
@@ -142,7 +172,7 @@ const AttributeParams = () => {
         <Checkbox checked={isArchive} onChange={() => setIsArchive(!isArchive)} label="Восстановленный" />
       </CheckboxiesContainer>
       <ButtonsContainer>
-        <Button label="Сохранить" size="s" />
+        <Button label="Сохранить" size="s" onClick={handleOnSave} loading={updateObjTemplateLoading} />
         <Button label="Отменить" view="secondary" size="s" onClick={handleOnCancel} />
       </ButtonsContainer>
     </TemplateLayout>

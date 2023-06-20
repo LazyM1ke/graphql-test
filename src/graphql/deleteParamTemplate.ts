@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const DELETE_PARAM_TEMPLATE = gql(`
     mutation deleteParamTemplate($input: [UUID!]!){
-       deleteParamTemplate(input: $input) {
+       paramTemplateDelete(input: $input) {
             data isSuccess
        }
   }
