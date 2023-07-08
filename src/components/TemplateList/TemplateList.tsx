@@ -31,7 +31,6 @@ const TemplateList = () => {
   const activeTemplate = useAppSelector((state) => state.ObjTemplateSlice.activeTemplate);
   const { data, loading, error } = useQuery<ObjTemplateData>(GET_OBJ_TEMPLATE);
   const { data: unitsData, loading: unitsLoading, error: unitsError } = useQuery<UnitsQueryData>(GET_UNITS);
-
   if (error) return <div>{`Error! ${error.message}`}</div>;
 
   if (loading || unitsLoading) {

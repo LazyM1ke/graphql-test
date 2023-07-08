@@ -10,8 +10,6 @@ export const GET_UNITS = gql(`
             name
             symbol
         }
-        totalCount
-
   }
 }
 `);

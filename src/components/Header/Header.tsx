@@ -3,8 +3,10 @@ import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextField';
 import { IconSearch } from '@consta/uikit/IconSearch';
 import styled from 'styled-components';
+import { Button } from '@consta/uikit/Button';
+import HeaderProps from './HeaderProps.types';
 
-const Header = () => {
+const Header = ({ setCatalogModal }: HeaderProps) => {
   const [inputValue, setInputValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setInputValue(value);
 
@@ -20,6 +22,7 @@ const Header = () => {
         placeholder="Поиск"
         leftSide={IconSearch}
       />
+      <Button label="Справочник" size="s" onClick={() => setCatalogModal()} />
     </StyledHeader>
   );
 };

@@ -95,8 +95,6 @@ const AttributeParams = () => {
     setCreatedAt(activeAttribute?.objTemplate?.createdAt || null);
   };
 
-  console.log(data);
-
   const handleOnSave = () => {
     updateObjTemplate({
       variables: {

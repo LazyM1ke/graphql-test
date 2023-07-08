@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './components/Header/Header';
 import TemplateList from './components/TemplateList/TemplateList';
 import Information from './components/Information/Information';
 import AttributeParams from './components/AttributeParams/AttributeParams';
 import AttributeList from './components/AttributeList/AttributeList';
+import CatalogModal from './components/CatalogModal/CatalogModal';
+import { useQuery } from '@apollo/client';
+import { GET_UNITS } from './graphql/units';
 
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const setCatalogModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   // const dispatch = useAppDispatch();
   // const [tempName, setTempName] = useState('');
 
@@ -35,13 +44,14 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      <Header setCatalogModal={setCatalogModal} />
       <MainPanel>
         {/*<Test />*/}
         <TemplateList />
         <Information />
         <AttributeList />
         <AttributeParams />
+        {isModalOpen && <CatalogModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
       </MainPanel>
     </div>
   );
