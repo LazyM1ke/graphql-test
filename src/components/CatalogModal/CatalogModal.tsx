@@ -138,7 +138,7 @@ const CatalogModal = ({ isModalOpen, setIsModalOpen }: CatalogModalProps) => {
   };
 
   const handleEditRow = (unit: UnitRow) => {
-    if (editMode) {
+    if (editMode && unit.id !== unitToEdit) {
       setUnitToEdit(unit.id);
       setEditUnitName(unit.name);
       setEditUnitCode(unit.code);
