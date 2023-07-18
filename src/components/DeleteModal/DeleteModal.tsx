@@ -25,11 +25,6 @@ const DeleteModal = () => {
       return null;
     }
   });
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-
-  console.log(activeAttribute?.id);
 
   const handleDeleteParam = () => {
     dispatch(setParamLoading(true));
@@ -57,17 +52,17 @@ const DeleteModal = () => {
   );
 };
 
-const StyledCloseIcon = styled(IconClose)`
+export const StyledCloseIcon = styled(IconClose)`
   cursor: pointer;
 `;
 
-const DeleteModalTitle = styled.div`
+export const DeleteModalTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const DeleteModalContainer = styled.div`
+export const DeleteModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -76,7 +71,7 @@ const DeleteModalContainer = styled.div`
   background-color: #ff4443;
 `;
 
-const DeleteModalButtons = styled.div`
+export const DeleteModalButtons = styled.div`
   display: flex;
   flex-direction: row;
   gap: 16px;
